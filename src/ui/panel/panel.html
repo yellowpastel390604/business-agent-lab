@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Provenance</title>
+<link rel="stylesheet" href="panel.css">
+</head>
+<body>
+<header>
+  <img class="logo" src="../../../assets/icons/icon-48.png" alt="" width="26" height="26">
+  <h1>Provenance</h1>
+  <div class="seg" role="tablist" aria-label="보기">
+    <button type="button" role="tab" id="tab-result" aria-selected="true">결과</button>
+    <button type="button" role="tab" id="tab-history" aria-selected="false">기록</button>
+  </div>
+  <button type="button" id="settings" class="icon" aria-label="설정" title="설정">⚙︎</button>
+</header>
+<main id="view" aria-live="polite"></main>
+<script type="module" src="panel.js"></script>
+</body>
+</html>

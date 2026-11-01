@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="light dark">
+<title>Provenance</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<header>
+  <img class="logo" src="../../../assets/icons/icon-48.png" alt="" width="30" height="30">
+  <div class="brand"><h1>Provenance</h1><span id="sub">원출처 추적기</span></div>
+  <label class="switch" title="게시글을 보고 있으면 자동으로 추적">
+    <input type="checkbox" id="enabled" role="switch" aria-label="자동 추적"><span></span>
+  </label>
+</header>
+
+<section id="site" class="card" hidden>
+  <div class="row">
+    <div class="grow"><b id="site-host"></b><small id="site-note"></small></div>
+    <button type="button" id="site-btn" class="pill">켜기</button>
+  </div>
+</section>
+
+<section class="card">
+  <h2>무료 모델</h2>
+  <label for="m-extract">주장 찾기</label>
+  <select id="m-extract"></select>
+  <label for="m-crawl">크롤러 (검색·다른 시각)</label>
+  <select id="m-crawl"></select>
+  <label for="m-confirm">출처 확인·요약</label>
+  <select id="m-confirm"></select>
+  <label for="m-translate">한국어로 옮기기 (구글 계열 추천)</label>
+  <select id="m-translate"></select>
+  <p id="note" class="note">무료 모델 목록을 불러오는 중…</p>
+</section>
+
+<section id="quota" class="card" hidden>
+  <div class="row"><b>오늘의 무료 요청</b><small id="quota-text" class="grow right"></small></div>
+  <div class="bar"><i id="quota-bar"></i></div>
+</section>
+
+<section id="access" class="card access" hidden>
+  <p>출처 사이트의 기사를 열어 읽으려면 접근 권한이 필요해요.</p>
+  <button type="button" id="allow" class="btn">사이트 접근 허용</button>
+</section>
+
+<section id="all-access" class="card access" hidden>
+  <p>목록 밖 매체의 기사까지 읽으려면 모든 사이트 읽기를 허용해야 해요. (선택) 허용하지 않으면 검색 결과 요약만으로 판단해요.</p>
+  <button type="button" id="allow-all" class="btn plain">모든 사이트 읽기 허용</button>
+</section>
+
+<footer>
+  <button type="button" id="panel" class="btn">사이드 패널 열기</button>
+  <button type="button" id="settings" class="btn plain">설정</button>
+</footer>
+<script type="module" src="popup.js"></script>
+</body>
+</html>
