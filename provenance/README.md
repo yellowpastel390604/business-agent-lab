@@ -21,8 +21,8 @@ It runs entirely in the browser: no server, free AI models through OpenRouter, f
 
 Requirements: Chrome 123+, and a free [OpenRouter](https://openrouter.ai) API key.
 
-1. Clone this repository.
-2. Open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked** and select the folder that contains `manifest.json`.
+1. Download the repository (**Code → Download ZIP**) or clone it, and unzip it. The extension is in the `provenance` folder.
+2. Open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked** and select the `provenance` folder (it contains `manifest.json`).
 3. On the options page that opens, paste your OpenRouter key and click **저장**. Allow access to the listed news sites when Chrome asks.
 4. Open x.com or reddit.com and stay on a post, or select any text on any page → right-click → **이 주장 추적하기**. Results appear in the side panel.
 
