@@ -2,7 +2,7 @@
 
 A Chrome extension that traces a short post back to the news report it came from, and tells you whether the post still says what the source said.
 
-Full technical documentation: [docs/TECHNICAL.md](docs/TECHNICAL.md).
+Technical documentation: [docs/TECHNICAL.md](docs/TECHNICAL.md).
 
 ## Purpose and intended user
 
@@ -77,7 +77,7 @@ selftest OK
 | "누리호 4차 발사가 성공했다." | 원문과 일치 — SBS, 2025-11-27, verified quote about 13 satellites (before: 출처 없음, because search only covered the 5th launch) |
 | "NASA's Artemis II crew flew around the Moon in April 2026" | match — nasa.gov (before: no source, only pre-launch previews were ranked) |
 | "출생아 26개월 연속 증가" (traced in Chrome on a KBC article) | 원문과 일치 — verified quote |
-| **Failure:** "오픈AI가 기업 가치를 낮췄다" | **왜곡됨, wrongly**: the claim is true; the model listed mere details as "conditions" and the new rule downgraded it |
+| **Failure:** "오픈AI가 기업 가치를 낮췄다" | **왜곡됨, wrongly**: the claim is true; the model listed mere details as "conditions". Fixed: the downgrade now also needs a "misleading" flag (tested offline only) |
 
 ## Three effective practices
 
@@ -89,7 +89,7 @@ selftest OK
 
 1. **Free model limits.** A model was retired mid-project, models are often busy, and the free tier allows 50 requests a day (a trace uses 6–18). *Response:* a fallback chain of models with retries. *Remaining:* traces take 1–2 minutes, and when the quota runs out summaries fall back to English.
 2. **Korean news search.** Bing and Naver list only about the last month, Naver blocks fast requests, and Korean sites hide articles in `<div>`s. *Response:* month-by-month Naver search, 1.5-second pacing, `<div>` article extraction. *Remaining:* results vary with the model's search words.
-3. **Judging "the original" and "distorted".** Reprints looked like the origin, and the model said *match* despite its own summary. *Response:* the fixes in Excerpt 2. *Remaining:* the government announcement behind the demo case is not reached reliably, and the condition rule is too strict (the OpenAI failure); a narrower rule is planned.
+3. **Judging "the original" and "distorted".** Reprints looked like the origin, and the model said *match* despite its own summary. *Response:* the fixes in Excerpt 2. *Remaining:* the government announcement behind the demo case is not reached reliably, and the narrower condition rule (after the OpenAI failure) still needs live re-testing.
 
 ## Known limitations
 

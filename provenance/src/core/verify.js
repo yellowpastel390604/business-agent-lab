@@ -41,10 +41,13 @@ function describe(candidates) {
   }).join('\n\n');
 }
 
-/** The source's conditions on the claim when the model says the claim drops them, else []. */
+/**
+ * The source's conditions on the claim, when the model says the claim drops them AND that this misleads, else [].
+ * Both flags must agree: a claim that only leaves out details (who reported it, exact figures) stays a match.
+ */
 function droppedConditions(out) {
-  if (out.claim_keeps_conditions !== false || !Array.isArray(out.conditions)) return [];
-  return out.conditions.map(c => String(c).trim()).filter(Boolean).slice(0, CONDITIONS_SHOWN);
+  if (out.claim_keeps_conditions !== false || out.misleading_without !== true || !Array.isArray(out.conditions)) return [];
+  return out.conditions.map(c => String(c).trim().replace(/[.;\s]+$/, '')).filter(Boolean).slice(0, CONDITIONS_SHOWN);
 }
 
 /**

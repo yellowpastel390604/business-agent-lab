@@ -214,13 +214,18 @@ globalThis.fetch = real;
     }
     return real(url, opts);
   };
-  const conditions = '"conditions":["only for patients with a prior visit"]';
-  globalThis.fetch = confirmWith(`{"best":1,"verdict":"match","quote":"","summary":"s.",${conditions},"claim_keeps_conditions":false}`);
-  const dropped = (await runPipeline('BoE raised its rate to 6% today per a viral post, big news', { ...DEFAULTS, apiKey: 'k', maxClaims: 1, outputLang: 'en' })).claims[0];
-  assert.equal(dropped.verdict, 'distorted'); assert.match(dropped.summary, /leaves out these limits: only for patients/);
-  globalThis.fetch = confirmWith(`{"best":1,"verdict":"match","quote":"","summary":"s.",${conditions},"claim_keeps_conditions":true}`);
-  const kept = (await runPipeline('BoE raised its rate to 6% today per a viral post, big news', { ...DEFAULTS, apiKey: 'k', maxClaims: 1, outputLang: 'en' })).claims[0];
+  const trace = async answer => {
+    globalThis.fetch = confirmWith(answer);
+    return (await runPipeline('BoE raised its rate to 6% today per a viral post, big news', { ...DEFAULTS, apiKey: 'k', maxClaims: 1, outputLang: 'en' })).claims[0];
+  };
+  const conditions = '"conditions":["only for patients with a prior visit."]';
+  const dropped = await trace(`{"best":1,"verdict":"match","quote":"","summary":"s.",${conditions},"claim_keeps_conditions":false,"misleading_without":true}`);
+  assert.equal(dropped.verdict, 'distorted'); assert.match(dropped.summary, /leaves out these limits: only for patients with a prior visit\.$/);
+  const kept = await trace(`{"best":1,"verdict":"match","quote":"","summary":"s.",${conditions},"claim_keeps_conditions":true,"misleading_without":true}`);
   assert.equal(kept.verdict, 'match', 'conditions kept: no downgrade');
+  // a true claim that only leaves out details (the OpenAI valuation case) stays a match
+  const details = await trace('{"best":1,"verdict":"match","quote":"","summary":"s.","conditions":["per Financial Times sources","valuation cut from $1.4tn to $1.25tn"],"claim_keeps_conditions":false,"misleading_without":false}');
+  assert.equal(details.verdict, 'match', 'details left out: no downgrade');
   globalThis.fetch = real;
 }
 
