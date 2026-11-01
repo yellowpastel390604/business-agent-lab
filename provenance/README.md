@@ -26,6 +26,8 @@ Requirements: Chrome 123+, and a free [OpenRouter](https://openrouter.ai) API ke
 3. On the options page that opens, paste your OpenRouter key and click **저장**. Allow access to the listed news sites when Chrome asks.
 4. Open x.com or reddit.com and stay on a post, or select any text on any page → right-click → **이 주장 추적하기**. Results appear in the side panel.
 
+**Why there is no install link:** Chrome blocks extensions installed from outside the Chrome Web Store (a `.crx` file from a link is rejected on Windows and macOS). Provenance is not on the Web Store, so it is installed as an unpacked extension, as above. There is no deployed URL.
+
 Developer checks (Node 18+):
 
 ```bash
