@@ -1,0 +1,62 @@
+{
+  "manifest_version": 3,
+  "name": "Provenance",
+  "version": "0.7.0",
+  "description": "짧은 글을 잠시 보고 있으면 주장의 원출처를 찾아 요약하고, 다른 시각까지 보여줘요.",
+  "minimum_chrome_version": "123",
+  "icons": {
+    "16": "assets/icons/icon-16.png",
+    "48": "assets/icons/icon-48.png",
+    "128": "assets/icons/icon-128.png"
+  },
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "scripting",
+    "activeTab",
+    "sidePanel"
+  ],
+  "host_permissions": [
+    "https://openrouter.ai/*",
+    "https://www.bing.com/*",
+    "https://html.duckduckgo.com/*",
+    "https://search.naver.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background/index.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://x.com/*",
+        "https://twitter.com/*",
+        "https://www.reddit.com/*"
+      ],
+      "js": [
+        "src/content/overlay.js",
+        "src/content/content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_ui": {
+    "page": "src/ui/options/options.html",
+    "open_in_tab": true
+  },
+  "action": {
+    "default_title": "Provenance",
+    "default_popup": "src/ui/popup/popup.html",
+    "default_icon": {
+      "16": "assets/icons/icon-16.png",
+      "48": "assets/icons/icon-48.png",
+      "128": "assets/icons/icon-128.png"
+    }
+  },
+  "optional_host_permissions": [
+    "https://*/*"
+  ],
+  "side_panel": {
+    "default_path": "src/ui/panel/panel.html"
+  }
+}

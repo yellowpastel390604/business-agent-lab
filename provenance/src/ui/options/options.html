@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Provenance 설정</title>
+<link rel="stylesheet" href="options.css">
+</head>
+<body>
+<header class="hero">
+  <img src="../../../assets/icons/icon-128.png" alt="" width="56" height="56">
+  <div><h1>Provenance</h1><p>짧은 글의 주장을 믿을 만한 원출처까지 추적해요</p></div>
+</header>
+
+<form id="form">
+  <section class="card">
+    <h2>OpenRouter 연결</h2>
+    <p class="hint">무료 모델만 써요. 키는 이 브라우저에만 저장되고 openrouter.ai로만 전송돼요.</p>
+    <label for="apiKey">API 키</label>
+    <div class="field">
+      <input type="password" id="apiKey" placeholder="sk-or-…" autocomplete="off" spellcheck="false">
+      <button type="button" id="reveal" class="ghost">보기</button>
+      <button type="button" id="test" class="ghost">확인</button>
+    </div>
+    <p id="key-status" class="hint" role="status"></p>
+    <div id="quota" class="quota" hidden>
+      <div class="qhead"><b>오늘의 무료 요청</b><span id="quota-text"></span></div>
+      <div class="bar"><i id="quota-bar"></i></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>추적 방식</h2>
+    <div class="row">
+      <div><b>자동 추적</b><p class="hint">글을 몇 초 보고 있으면 자동으로 추적해요</p></div>
+      <label class="switch"><input type="checkbox" id="enabled" role="switch" aria-label="자동 추적"><span></span></label>
+    </div>
+    <div class="row">
+      <div><b>목록 밖 매체도 검색</b><p class="hint">목록에서 출처를 못 찾으면 모든 매체에서 찾아요. 이런 결과에는 “목록 밖 출처” 표시가 붙어요.</p></div>
+      <label class="switch"><input type="checkbox" id="openSearch" role="switch" aria-label="목록 밖 매체도 검색"><span></span></label>
+    </div>
+    <div class="row col">
+      <div class="between"><b>머무는 시간</b><output id="dwellOut"></output></div>
+      <input type="range" id="dwellSec" min="1" max="10" step="0.5">
+    </div>
+    <div class="row col">
+      <b>글 하나에서 추적할 주장 수</b>
+      <div class="seg" role="radiogroup" aria-label="주장 수">
+        <label><input type="radio" name="maxClaims" value="1"><span>1개</span></label>
+        <label><input type="radio" name="maxClaims" value="2"><span>2개</span></label>
+        <label><input type="radio" name="maxClaims" value="3"><span>3개</span></label>
+      </div>
+      <p class="hint">주장이 많을수록 무료 요청을 더 써요 (글 하나에 약 4~10회).</p>
+    </div>
+    <div class="row col">
+      <label for="outputLang"><b>요약 언어</b></label>
+      <select id="outputLang">
+        <option value="ko">한국어</option>
+        <option value="en">English</option>
+        <option value="auto">원문 언어와 같게</option>
+      </select>
+    </div>
+    <p class="hint">모델은 툴바 아이콘에서 고를 수 있어요.</p>
+  </section>
+
+  <section class="card">
+    <h2>출처 사이트</h2>
+    <p class="hint">한 줄에 도메인 하나. 저장하면 Chrome이 이 사이트의 기사를 읽어도 되는지 물어봐요.</p>
+    <label for="trustedDomains">일반 출처 <span id="c-trusted" class="count"></span></label>
+    <textarea id="trustedDomains" spellcheck="false"></textarea>
+    <label for="koreanDomains">한국 출처 <span id="c-korean" class="count"></span></label>
+    <textarea id="koreanDomains" spellcheck="false"></textarea>
+    <label for="perspectiveDomains">다른 시각용 매체 <span id="c-persp" class="count"></span></label>
+    <textarea id="perspectiveDomains" spellcheck="false"></textarea>
+    <button type="button" id="resetDomains" class="ghost">기본 목록으로 되돌리기</button>
+  </section>
+
+  <section class="card">
+    <h2>자동 추적을 켠 사이트</h2>
+    <p class="hint">툴바 아이콘 → “켜기”로 사이트를 추가해요. X와 Reddit은 기본으로 지원해요.</p>
+    <ul id="sites" class="sites"></ul>
+  </section>
+
+  <div class="savebar">
+    <span id="status" role="status"></span>
+    <button type="submit" class="primary">저장</button>
+  </div>
+</form>
+<script type="module" src="options.js"></script>
+</body>
+</html>

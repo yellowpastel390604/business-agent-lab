@@ -1,0 +1,9 @@
+# Secrets: the OpenRouter key for the dev scripts lives here
+.env
+.env.*
+
+# Build output and local clutter
+*.zip
+node_modules/
+__pycache__/
+.DS_Store
