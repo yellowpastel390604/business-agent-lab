@@ -22,7 +22,7 @@ It runs entirely in the browser: no server, free AI models through OpenRouter, f
 Requirements: Chrome 123+, and a free [OpenRouter](https://openrouter.ai) API key.
 
 1. Download the repository (**Code → Download ZIP**) or clone it, and unzip it. The extension is in the `provenance` folder.
-2. Open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked** and select the `provenance` folder (it contains `manifest.json`).
+2. Open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked** and select the `provenance` folder.
 3. On the options page that opens, paste your OpenRouter key and click **저장**. Allow access to the listed news sites when Chrome asks.
 4. Open x.com or reddit.com and stay on a post, or select any text on any page → right-click → **이 주장 추적하기**. Results appear in the side panel.
 
@@ -82,7 +82,7 @@ selftest OK
 ## Three effective practices
 
 1. **A gated workflow in the agent's instructions.** An approved plan before any change stopped the agent from "fixing" the wrong thing and let me redirect early.
-2. **Diagnose with logged runs first.** Every wrong verdict was traced to its real cause before code changed: retired model, previews ranked first, undated Korean results. Fixes stayed general instead of tuned to one case.
+2. **Diagnose with logged runs first.** Every wrong verdict was traced to its real cause before code changed: retired model, previews ranked first, undated Korean results. Fixes stayed general.
 3. **A fast offline self-test plus strict secret handling.** The pipeline uses only `fetch`, so the same code runs in Node against simulated services in seconds, without spending quota. The API key never appears in chat or Git; it lives only in a git-ignored `.env`.
 
 ## Three difficulties
